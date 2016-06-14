@@ -109,7 +109,7 @@ Mojolicious::Plugin::Google::Cloud::UserAgent - A user agent for GCP
     my $c = shift;
     $c->render_later;
 
-    $c->app->gcp_ua(GET => "https://pubsub.googleapis.com/v1/$ENV{GCP_PROJECT}/eig-nextgen/topics",
+    $c->app->gcp_ua(GET => "https://pubsub.googleapis.com/v1/projects/$ENV{GCP_PROJECT}/topics",
                     sub {  ## response handler
                         my ($ua, $tx) = @_;
                         $c->render(json => $tx->res->json, status => $tx->res->code);
