@@ -2,7 +2,7 @@ package Mojolicious::Plugin::Google::Cloud::UserAgent;
 use Mojo::Base 'Mojolicious::Plugin';
 use Mojo::JWT::Google;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 has oauth_url     => 'https://www.googleapis.com/oauth2/v4/token';
 has grant_type    => 'urn:ietf:params:oauth:grant-type:jwt-bearer';
