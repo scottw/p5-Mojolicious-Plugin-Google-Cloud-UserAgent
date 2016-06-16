@@ -2,7 +2,7 @@ package Mojolicious::Plugin::Google::Cloud::UserAgent;
 use Mojo::Base 'Mojolicious::Plugin';
 use Mojo::JWT::Google;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 has oauth_url     => 'https://www.googleapis.com/oauth2/v4/token';
 has grant_type    => 'urn:ietf:params:oauth:grant-type:jwt-bearer';
@@ -58,11 +58,14 @@ sub register {
                     my $d  = shift;
                     my $tx = pop;
 
-                    unless ($tx->res->json('/access_token')) {
-                        return $err_cb->($tx, $c);
+                    if ($tx->res->json('/access_token')) {
+                        $d->pass($tx->res->json);
                     }
 
-                    $d->pass($tx->res->json);
+                    else {
+                        $d->remaining([$err_cb]);
+                        $d->pass($tx);
+                    }
                 },
 
                 sub {
@@ -74,10 +77,7 @@ sub register {
                     $c->ua->start($tx, $d->begin);
                 },
 
-                sub {
-                    my $d = shift;
-                    $cb->(@_);
-                }
+                $cb
             );
         }
     );
@@ -109,15 +109,15 @@ Mojolicious::Plugin::Google::Cloud::UserAgent - A user agent for GCP
     my $c = shift;
     $c->render_later;
 
-    $c->app->gcp_ua(GET => "https://pubsub.googleapis.com/v1/projects/$ENV{GCP_PROJECT}/topics",
-                    sub {  ## response handler
-                        my ($ua, $tx) = @_;
-                        $c->render(json => $tx->res->json, status => $tx->res->code);
-                    },
-                    sub {  ## error sub
-                        my ($tx, $c) = @_;
-                        $c->render(json => $tx->res->json, status => $tx->res->code);
-                    }
+    $c->gcp_ua(GET => "https://pubsub.googleapis.com/v1/projects/$ENV{GCP_PROJECT}/topics",
+               sub {  ## response handler
+                   my $tx = pop;
+                   $c->render(json => $tx->res->json, status => $tx->res->code);
+               },
+               sub {  ## error sub
+                   my $tx = pop;
+                   $c->render(json => $tx->res->json, status => $tx->res->code);
+               }
     );
   };
 
@@ -130,7 +130,7 @@ L<https://cloud.google.com/docs/authentication>.
 
 First, create a service account key:
 
-    L<https://console.cloud.google.com/apis/credentials?project=your-project>
+L<https://console.cloud.google.com/apis/credentials?project=your-project>
 
 Download this JSON file; you may hard-code the path to the JSON
 service account key file when you load this plugin, or set an
@@ -164,16 +164,63 @@ Register plugin in L<Mojolicious> application.
 
 =head2 gcp_ua
 
-  $c->app->gcp_ua(POST => $gcp_url, $cb, $error_cb);
+  $c->gcp_ua(METHOD => $gcp_url, $headers, $type => $payload, $cb, $error_cb);
 
 Makes a non-blocking HTTP request of the given method to the given GCP
-url. If the OAuth step succeeds, the C<$cb> callback will be invoked
-and passed the user agent object and the transaction
-object. Otherwise, the C<$error_cb> will be invoked and passed the
-controller object and the transaction object of the OAuth request.
+url. Like L<Mojo::UserAgent>'s HTTP methods, C<$headers>, C<$type>,
+and C<$payload> are optional. If the OAuth step succeeds, the C<$cb>
+callback will be invoked, otherwise, the C<$error_cb> will be invoked.
+
+The success callback will be passed a delay object and a transaction
+object. Note that while the OAuth succeeded if this callback is
+invoked, the API method itself may have failed, so you would check
+that like this:
+
+  $c->gcp_ua(GET => $api,
+             sub {
+                 my $tx = pop;
+                 unless ($tx->success) {
+                     $c->render(json => { error => "Had a boo-boo" },
+                                status => 503);
+                 }
+
+                 ## everything is ok
+                 ...
+            },
+            sub { }  ## error cb
+            );
+
+The second (error) callback is invoked if the OAuth attempt fails. It
+will be passed a controller object and a transaction object.
+
+  $c->gcp_ua(GET => $api,
+             sub { },  ## success cb
+             sub {
+               my $tx = pop;
+               $c->render(json => { error => $tx->res->body },
+                          status => 403);
+             });
+
+Here is a more complete example to demonstrate headers and using a
+JSON generator:
+
+  $c->gcp_ua(POST => $api,
+             { 'Accept' => 'application/json' },
+             json => { message => "the payload" },
+             sub {
+               my $tx = pop;
+               $c->render(json => $tx->res->json,
+                          status => $tx->res->code);
+             },
+             sub {
+               my $tx = pop;
+               $c->app->log->warn("OAuth failed: " . $tx->res->body);
+               $c->render(json => { error => "Could not auth" },
+                          status => 403);
+             });
 
 =head1 SEE ALSO
 
-L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicious.org>.
+L<Mojo::UserAgent>, L<Mojo::JWT::Google>
 
 =cut
