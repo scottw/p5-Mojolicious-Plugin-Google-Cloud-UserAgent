@@ -90,15 +90,15 @@ DISTRIBUTIONS
       MIME::Base64 3.11
       Module::Build 0.38
       Mojolicious 5.00
-  Mojo-JWT-Google-0.05
-    pathname: R/RI/RICHE/Mojo-JWT-Google-0.05.tar.gz
+  Mojo-JWT-Google-0.06
+    pathname: R/RI/RICHE/Mojo-JWT-Google-0.06.tar.gz
     provides:
-      Mojo::JWT::Google 0.05
+      Mojo::JWT::Google 0.06
     requirements:
       Module::Build 0.42
       Mojo::JWT 0.03
-  Mojolicious-6.64
-    pathname: S/SR/SRI/Mojolicious-6.64.tar.gz
+  Mojolicious-7.33
+    pathname: S/SR/SRI/Mojolicious-7.33.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -120,6 +120,7 @@ DISTRIBUTIONS
       Mojo::Date undef
       Mojo::EventEmitter undef
       Mojo::Exception undef
+      Mojo::File undef
       Mojo::Headers undef
       Mojo::HelloWorld undef
       Mojo::Home undef
@@ -128,6 +129,8 @@ DISTRIBUTIONS
       Mojo::IOLoop::Delay undef
       Mojo::IOLoop::Server undef
       Mojo::IOLoop::Stream undef
+      Mojo::IOLoop::Subprocess undef
+      Mojo::IOLoop::TLS undef
       Mojo::JSON undef
       Mojo::JSON::Pointer undef
       Mojo::Loader undef
@@ -145,6 +148,8 @@ DISTRIBUTIONS
       Mojo::Server::Daemon undef
       Mojo::Server::Hypnotoad undef
       Mojo::Server::Morbo undef
+      Mojo::Server::Morbo::Backend undef
+      Mojo::Server::Morbo::Backend::Poll undef
       Mojo::Server::PSGI undef
       Mojo::Server::PSGI::_IO undef
       Mojo::Server::Prefork undef
@@ -161,7 +166,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 6.64
+      Mojolicious 7.33
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -183,7 +188,6 @@ DISTRIBUTIONS
       Mojolicious::Controller undef
       Mojolicious::Lite undef
       Mojolicious::Plugin undef
-      Mojolicious::Plugin::Charset undef
       Mojolicious::Plugin::Config undef
       Mojolicious::Plugin::Config::Sandbox undef
       Mojolicious::Plugin::DefaultHelpers undef
