@@ -14,45 +14,84 @@ DISTRIBUTIONS
       Crypt::OpenSSL::Random 0.11
     requirements:
       ExtUtils::MakeMaker 0
-  IO-Socket-SSL-2.027
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.027.tar.gz
+  ExtUtils-Config-0.008
+    pathname: L/LE/LEONT/ExtUtils-Config-0.008.tar.gz
     provides:
-      IO::Socket::SSL 2.027
+      ExtUtils::Config 0.008
+    requirements:
+      Data::Dumper 0
+      ExtUtils::MakeMaker 6.30
+      strict 0
+      warnings 0
+  ExtUtils-Helpers-0.026
+    pathname: L/LE/LEONT/ExtUtils-Helpers-0.026.tar.gz
+    provides:
+      ExtUtils::Helpers 0.026
+      ExtUtils::Helpers::Unix 0.026
+      ExtUtils::Helpers::VMS 0.026
+      ExtUtils::Helpers::Windows 0.026
+    requirements:
+      Carp 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Copy 0
+      File::Spec::Functions 0
+      Text::ParseWords 3.24
+      perl 5.006
+      strict 0
+      warnings 0
+  ExtUtils-InstallPaths-0.011
+    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.011.tar.gz
+    provides:
+      ExtUtils::InstallPaths 0.011
+    requirements:
+      Carp 0
+      ExtUtils::Config 0.002
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      perl 5.006
+      strict 0
+      warnings 0
+  IO-Socket-SSL-2.049
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.049.tar.gz
+    provides:
+      IO::Socket::SSL 2.049
       IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.027
-      IO::Socket::SSL::OCSP_Resolver 2.027
+      IO::Socket::SSL::OCSP_Cache 2.049
+      IO::Socket::SSL::OCSP_Resolver 2.049
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.027
-      IO::Socket::SSL::SSL_HANDLE 2.027
-      IO::Socket::SSL::Session_Cache 2.027
+      IO::Socket::SSL::SSL_Context 2.049
+      IO::Socket::SSL::SSL_HANDLE 2.049
+      IO::Socket::SSL::Session_Cache 2.049
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  Module-Build-0.4218
-    pathname: L/LE/LEONT/Module-Build-0.4218.tar.gz
+  Module-Build-0.4224
+    pathname: L/LE/LEONT/Module-Build-0.4224.tar.gz
     provides:
-      Module::Build 0.4218
-      Module::Build::Base 0.4218
-      Module::Build::Compat 0.4218
-      Module::Build::Config 0.4218
-      Module::Build::Cookbook 0.4218
-      Module::Build::Dumper 0.4218
-      Module::Build::Notes 0.4218
-      Module::Build::PPMMaker 0.4218
-      Module::Build::Platform::Default 0.4218
-      Module::Build::Platform::MacOS 0.4218
-      Module::Build::Platform::Unix 0.4218
-      Module::Build::Platform::VMS 0.4218
-      Module::Build::Platform::VOS 0.4218
-      Module::Build::Platform::Windows 0.4218
-      Module::Build::Platform::aix 0.4218
-      Module::Build::Platform::cygwin 0.4218
-      Module::Build::Platform::darwin 0.4218
-      Module::Build::Platform::os2 0.4218
-      Module::Build::PodParser 0.4218
+      Module::Build 0.4224
+      Module::Build::Base 0.4224
+      Module::Build::Compat 0.4224
+      Module::Build::Config 0.4224
+      Module::Build::Cookbook 0.4224
+      Module::Build::Dumper 0.4224
+      Module::Build::Notes 0.4224
+      Module::Build::PPMMaker 0.4224
+      Module::Build::Platform::Default 0.4224
+      Module::Build::Platform::MacOS 0.4224
+      Module::Build::Platform::Unix 0.4224
+      Module::Build::Platform::VMS 0.4224
+      Module::Build::Platform::VOS 0.4224
+      Module::Build::Platform::Windows 0.4224
+      Module::Build::Platform::aix 0.4224
+      Module::Build::Platform::cygwin 0.4224
+      Module::Build::Platform::darwin 0.4224
+      Module::Build::Platform::os2 0.4224
+      Module::Build::PodParser 0.4224
     requirements:
       CPAN::Meta 2.142060
       CPAN::Meta::YAML 0.003
@@ -81,14 +120,39 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.006001
       version 0.87
-  Mojo-JWT-0.04
-    pathname: J/JB/JBERGER/Mojo-JWT-0.04.tar.gz
+  Module-Build-Tiny-0.039
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.039.tar.gz
     provides:
-      Mojo::JWT 0.04
+      Module::Build::Tiny 0.039
+    requirements:
+      CPAN::Meta 0
+      DynaLoader 0
+      Exporter 5.57
+      ExtUtils::CBuilder 0
+      ExtUtils::Config 0.003
+      ExtUtils::Helpers 0.020
+      ExtUtils::Install 0
+      ExtUtils::InstallPaths 0.002
+      ExtUtils::ParseXS 0
+      File::Basename 0
+      File::Find 0
+      File::Path 0
+      File::Spec::Functions 0
+      Getopt::Long 2.36
+      JSON::PP 2
+      Pod::Man 0
+      TAP::Harness::Env 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Mojo-JWT-0.05
+    pathname: J/JB/JBERGER/Mojo-JWT-0.05.tar.gz
+    provides:
+      Mojo::JWT 0.05
     requirements:
       Digest::SHA 0
       MIME::Base64 3.11
-      Module::Build 0.38
+      Module::Build::Tiny 0
       Mojolicious 5.00
   Mojo-JWT-Google-0.06
     pathname: R/RI/RICHE/Mojo-JWT-Google-0.06.tar.gz
@@ -226,10 +290,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test 0
       perl 5.006
-  Net-SSLeay-1.74
-    pathname: M/MI/MIKEM/Net-SSLeay-1.74.tar.gz
+  Net-SSLeay-1.81
+    pathname: M/MI/MIKEM/Net-SSLeay-1.81.tar.gz
     provides:
-      Net::SSLeay 1.74
+      Net::SSLeay 1.81
       Net::SSLeay::Handle 0.61
     requirements:
       ExtUtils::MakeMaker 6.36

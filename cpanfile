@@ -1,4 +1,4 @@
-requires 'Mojolicious','7.33';
+requires 'Mojolicious';
 requires 'IO::Socket::SSL';
-requires 'Mojo::JWT::Google','0.06';
+requires 'Mojo::JWT::Google';
 requires 'Crypt::OpenSSL::RSA';
